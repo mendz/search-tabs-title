@@ -1,4 +1,33 @@
+* {
+  font-family: 'Gudea', sans-serif;
+}
 div#main-container {
-  min-height: 100%;
-  min-width: 100%;
+  max-height: 100%;
+  max-width: 100%;
+  min-width: 210px;
+}
+
+div#input-container {
+  display: flex;
+  height: 35px;
+}
+
+div#input-container input {
+  padding-left: 5px;
+  margin-right: 15px;
+}
+
+span.matchQuery {
+  background-color: rgb(211, 141, 243);
+}
+
+ul#list-search-tab-title-results {
+  padding-left: 0;
+  list-style: none;
+}
+
+ul#list-search-tab-title-results li {
+  padding: .3em;
+  border: 1px dashed purple;
+  font-size: 1.2em;
 }

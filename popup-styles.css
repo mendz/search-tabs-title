@@ -12,9 +12,13 @@ div#input-container {
   height: 35px;
 }
 
-div#input-container input {
+div#input-container input#search-tab-title {
   padding-left: 5px;
   margin-right: 15px;
+}
+
+div#input-container div#radio-input-filter {
+  display: flex;
 }
 
 span.matchQuery {
@@ -30,4 +34,5 @@ ul#list-search-tab-title-results li {
   padding: .3em;
   border: 1px dashed purple;
   font-size: 1.2em;
+  word-break: break-word;
 }

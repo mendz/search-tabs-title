@@ -16,6 +16,16 @@
     <div id="input-container">
       <input id="search-tab-title" name="search-tab-title" type="text" placeholder="Insert search query" />
       <h4 id="count-items" title="Search item count"></h4>
+      <div id="radio-input-filter">
+        <label for="filter-by-title">
+          Title
+          <input type="radio" name="filter-type" id="filter-by-title" data-type="title" title="Filter by title" checked/>
+        </label>
+        <label for="filter-by-url">
+          Url
+          <input type="radio" name="filter-type" id="filter-by-url" data-type="url" title="Filter by url" />
+        </label>
+      </div>
     </div>
     <ul id="list-search-tab-title-results"></ul>
   </div>

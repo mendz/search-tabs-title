@@ -8,18 +8,38 @@ function focusTab() {
   });
 }
 
+function getSearchFilterType() {
+  return Array.from(document.querySelectorAll('div#radio-input-filter input')).find(input => input.checked).dataset.type;
+}
+
 function loadListItems(items, regex) {
   const list = document.querySelector('ul#list-search-tab-title-results');
+  const checkedFilterType = getSearchFilterType();
+
   list.innerHTML = items.map(tab => {
-    let { title } = tab;
+    const { title, url } = tab;
+
+    let itemTitle;
+    let itemText;
+
+    switch (checkedFilterType) {
+      case 'url':
+        itemTitle = title;
+        itemText = url;
+        break;
+      default:
+        itemTitle = url;
+        itemText = title;
+        break;
+    }
 
     if (regex) {
-      const matchQuery = tab.title.match(regex)[0];
-      title = tab.title.replace(regex, `<span class="matchQuery">${matchQuery}</span>`);
+      const matchQuery = itemText.match(regex)[0];
+      itemText = itemText.replace(regex, `<span class="matchQuery">${matchQuery}</span>`);
     }
 
     return `
-    <li data-id="${tab.id}" title="${tab.url}"><a href="#">${title}</a></li>
+    <li data-id="${tab.id}" title="${itemTitle}"><a href="#">${itemText}</a></li>
     `;
   }).join('');
 
@@ -49,10 +69,14 @@ function initListItems() {
 
 function onChangeInputSearch() {
   const inputValue = this.value;
+  const searchFilterType = getSearchFilterType();
 
   if (inputValue.length !== 0) {
     const regex = new RegExp(inputValue, 'gi');
-    const filteredTabs = titleTabsCurrentWindow.filter(tab => regex.test(tab.title));
+    const filteredTabs = titleTabsCurrentWindow.filter(tab => regex.test(tab[searchFilterType]));
+
+    console.log(filteredTabs);
+
 
     loadListItems(filteredTabs, regex);
   } else {
@@ -60,11 +84,17 @@ function onChangeInputSearch() {
   }
 }
 
+function onChangeInputFilterType() {
+  initListItems();
+}
+
 function setInputListener() {
   const input = document.querySelector('input#search-tab-title');
   input.addEventListener('input', onChangeInputSearch);
 
   input.focus();
+
+  document.querySelectorAll('div#radio-input-filter input').forEach(inputType => inputType.addEventListener('change', onChangeInputFilterType));
 }
 
 document.addEventListener('DOMContentLoaded', () => {

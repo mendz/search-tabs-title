@@ -35,4 +35,5 @@ ul#list-search-tab-title-results li {
   border: 1px dashed purple;
   font-size: 1.2em;
   word-break: break-word;
+  min-width: 210px;
 }

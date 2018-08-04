@@ -23,14 +23,14 @@ function loadListItems(items, regex) {
     let itemText;
 
     switch (checkedFilterType) {
-      case 'url':
-        itemTitle = title;
-        itemText = url;
-        break;
-      default:
-        itemTitle = url;
-        itemText = title;
-        break;
+    case 'url':
+      itemTitle = title;
+      itemText = url;
+      break;
+    default:
+      itemTitle = url;
+      itemText = title;
+      break;
     }
 
     if (regex) {
@@ -75,9 +75,6 @@ function onChangeInputSearch() {
     const regex = new RegExp(inputValue, 'gi');
     const filteredTabs = titleTabsCurrentWindow.filter(tab => regex.test(tab[searchFilterType]));
 
-    console.log(filteredTabs);
-
-
     loadListItems(filteredTabs, regex);
   } else {
     loadListItems(titleTabsCurrentWindow);
@@ -85,7 +82,13 @@ function onChangeInputSearch() {
 }
 
 function onChangeInputFilterType() {
-  initListItems();
+  const inputEvent = new Event('input', {
+    bubbles: true,
+    cancelable: true
+  });
+
+  const searchInput = document.querySelector('input#search-tab-title');
+  searchInput.dispatchEvent(inputEvent);
 }
 
 function setInputListener() {

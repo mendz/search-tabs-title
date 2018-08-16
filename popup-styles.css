@@ -33,13 +33,14 @@ div#input-container {
 }
 
 div#input-container input#search-tab-title {
-  margin-right: 15px;
+  margin-right: 10%;
   line-height: 1.5;
   border: none;
   background: rgba(255, 255, 255, 0.2);
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
   padding: 0.5em 1em 0.5em 0.5em;
   border-radius: 10px;
+  flex-basis: 80%;
 }
 
 div#input-container input#search-tab-title::placeholder {
@@ -80,6 +81,16 @@ ul#list-search-tab-title-results li {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16);
   color: #694d4d;
   border-radius: 15px;
+}
+
+ul#list-search-tab-title-results li span{
+  display: inline-block;
+}
+
+ul#list-search-tab-title-results li span.item-url-text{
+  margin-top: 5px;
+  font-style: italic;
+  font-size: .8em;
 }
 
 ul#list-search-tab-title-results li:hover {

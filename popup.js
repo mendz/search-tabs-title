@@ -14,8 +14,11 @@ function loadListItems(items, regex) {
 
   list.innerHTML = items
     .map(tab => {
-      const { tabIndex } = tab;
+      const { tabIndex, active } = tab;
       let { title: itemTitleText, url: itemUrlText } = tab;
+
+      const activeClass = active ? 'class="active-tab-item"' : '';
+      const activeWord = active ? 'Active ' : '';
 
       itemTitleText = stripHtmlTags(itemTitleText);
       itemUrlText = stripHtmlTags(itemUrlText);
@@ -28,7 +31,7 @@ function loadListItems(items, regex) {
       }
 
       return `
-    <li data-id="${tab.id}" title="Tab index: ${tabIndex}"><span class="item-title-text">${itemTitleText}</span><span class="item-url-text">${itemUrlText}</span></li>
+    <li data-id="${tab.id}" title="${activeWord}Tab index: ${tabIndex}" ${activeClass}><span class="item-title-text">${itemTitleText}</span><span class="item-url-text">${itemUrlText}</span></li>
     `;
     })
     .join('');
@@ -46,11 +49,15 @@ function initListItems() {
     },
     tabsArray => {
       const tabsTitles = tabsArray.map(tabWindow => {
+
+        console.log(tabWindow);
+
         const info = {
           id: tabWindow.id,
           url: tabWindow.url,
           title: tabWindow.title,
-          tabIndex: tabWindow.index + 1
+          tabIndex: tabWindow.index + 1,
+          active: tabWindow.active
         };
         return info;
       });

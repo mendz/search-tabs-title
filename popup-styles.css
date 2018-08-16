@@ -83,6 +83,10 @@ ul#list-search-tab-title-results li {
   border-radius: 15px;
 }
 
+ul#list-search-tab-title-results li.active-tab-item {
+  background-color: #c4fff7;
+}
+
 ul#list-search-tab-title-results li span{
   display: inline-block;
 }
@@ -97,4 +101,8 @@ ul#list-search-tab-title-results li:hover {
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.16);
   background-color: #f6f0f080;
   color: #000000;
+}
+
+ul#list-search-tab-title-results li.active-tab-item:hover {
+  background-color: #bafff7;
 }

@@ -39,7 +39,7 @@ function loadListItems(items, regex) {
     }
 
     return `
-    <li data-id="${tab.id}" title="${itemTitle}"><a href="#">${itemText}</a></li>
+    <li data-id="${tab.id}" title="${itemTitle}">${itemText}</li>
     `;
   }).join('');
 

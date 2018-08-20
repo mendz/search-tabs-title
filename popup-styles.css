@@ -1,21 +1,18 @@
-body::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	border-radius: 10px;
-	background-color: #F5F5F5;
+body::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: #f5f5f5;
 }
 
-body::-webkit-scrollbar
-{
-	width: 8px;
-	background-color: #F5F5F5;
+body::-webkit-scrollbar {
+  width: 8px;
+  background-color: #f5f5f5;
 }
 
-body::-webkit-scrollbar-thumb
-{
-	border-radius: 10px;
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: rgb(195, 140, 179);
+body::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: rgb(195, 140, 179);
 }
 
 * {
@@ -56,7 +53,7 @@ div#input-container div#radio-input-filter {
   display: flex;
 }
 
-div#input-container div#radio-input-filter label:first-of-type{
+div#input-container div#radio-input-filter label:first-of-type {
   margin: 0 10px;
 }
 
@@ -73,8 +70,8 @@ ul#list-search-tab-title-results {
 ul#list-search-tab-title-results li {
   user-select: none;
   cursor: pointer;
-  padding: .4em 1em;
-  margin-bottom: .5em;
+  padding: 0.4em 1em;
+  margin-bottom: 0.5em;
   font-size: 1.2em;
   word-break: break-word;
   min-width: 210px;
@@ -87,14 +84,25 @@ ul#list-search-tab-title-results li.active-tab-item {
   background-color: #c4fff7;
 }
 
-ul#list-search-tab-title-results li span{
-  display: inline-block;
+ul#list-search-tab-title-results li span.item-title-text,
+ul#list-search-tab-title-results li span.item-url-text {
+  display: block;
 }
 
-ul#list-search-tab-title-results li span.item-url-text{
+ul#list-search-tab-title-results li span.item-title-text {
+  font-weight: bold;
+}
+
+ul#list-search-tab-title-results li span.item-url-text {
   margin-top: 5px;
   font-style: italic;
-  font-size: .8em;
+  font-size: 0.8em;
+  /* handle long urls */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 ul#list-search-tab-title-results li:hover {

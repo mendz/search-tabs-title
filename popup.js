@@ -21,7 +21,7 @@ function loadListItems(items, regex) {
       const activeWord = active ? 'Active ' : '';
 
       itemTitleText = stripHtmlTags(itemTitleText);
-      itemUrlText = stripHtmlTags(itemUrlText);
+      itemUrlText = decodeURI(stripHtmlTags(itemUrlText));
 
       if (regex) {
         const matchQueryTitle = itemTitleText.match(regex) ? itemTitleText.match(regex)[0] : itemTitleText;

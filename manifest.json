@@ -1,10 +1,11 @@
 {
-  "name": "Search Tabs Title",
-  "description": "A pop-up window that let you find your wished tab in the current window, by a title or URL",
+  "name": "Search Tabs By Title or URL",
+  "short_name": "Search Tab",
+  "description": "Find your wished tab in the current window, by a title or URL",
   "version": "1.0.0",
   "manifest_version": 2,
   "browser_action": {
-    "default_title": "Search tabs title",
+    "default_title": "Search Tabs By Title or URL",
     "default_icon": {
       "16": "icons/icons8-search-16.png",
       "32": "icons/icons8-search-32.png",

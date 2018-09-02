@@ -1,6 +1,6 @@
 {
-  "name": "Search Title",
-  "description": "A pop-up window with search for all the current window tabs.\nThe icons (all sizes) are from -  https://icons8.com - Icon pack by Icons8",
+  "name": "Search Tabs Title",
+  "description": "A pop-up window that let you find your wished tab in the current window, by a title or URL",
   "version": "1.0.0",
   "manifest_version": 2,
   "browser_action": {

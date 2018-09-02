@@ -20,7 +20,6 @@ body::-webkit-scrollbar-thumb {
 }
 div#main-container {
   max-height: 100%;
-  max-width: 100%;
   min-width: 210px;
 }
 
@@ -64,7 +63,6 @@ span.matchQuery {
 ul#list-search-tab-title-results {
   padding-left: 0;
   list-style: none;
-  /* border: 1px dashed purple; */
 }
 
 ul#list-search-tab-title-results li {
@@ -97,6 +95,7 @@ ul#list-search-tab-title-results li span.item-url-text {
   margin-top: 5px;
   font-style: italic;
   font-size: 0.8em;
+
   /* handle long urls */
   overflow: hidden;
   text-overflow: ellipsis;

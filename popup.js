@@ -50,8 +50,6 @@ function initListItems() {
     tabsArray => {
       const tabsTitles = tabsArray.map(tabWindow => {
 
-        console.log(tabWindow);
-
         const info = {
           id: tabWindow.id,
           url: tabWindow.url,

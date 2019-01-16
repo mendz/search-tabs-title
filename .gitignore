@@ -1,5 +1,7 @@
 node_modules
 
 .vscode
-*.zip
+zip
 screenshots
+icons
+md

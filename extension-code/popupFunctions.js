@@ -1,7 +1,7 @@
 /* globals chrome */
 
 let titleTabsCurrentWindow = [];
-const stripHtmlTags = htmlString => htmlString.replace(/<([^>]+)+>/g, '$1');
+const stripHtmlTags = htmlString => htmlString.replace(/(<([^>]+)>)/g, '').replace(/(<|>)/gi,'');
 
 function focusTab() {
   chrome.tabs.update(Number(this.dataset.id), {
@@ -20,7 +20,8 @@ function loadListItems(items, regex) {
       const activeClass = active ? 'class="active-tab-item"' : '';
       const activeWord = active ? 'Active ' : '';
 
-      itemUrlText = decodeURI(stripHtmlTags(itemUrlText));
+      itemTitleText = stripHtmlTags(itemTitleText);
+      itemUrlText = stripHtmlTags(decodeURI(itemUrlText));
 
       if (regex) {
         const matchQueryTitle = itemTitleText.match(regex) ? itemTitleText.match(regex)[0] : itemTitleText;
@@ -58,7 +59,6 @@ function initListItems() {
         };
         return info;
       });
-
 
       titleTabsCurrentWindow = tabsTitles;
       loadListItems(tabsTitles);

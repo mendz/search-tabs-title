@@ -1,15 +1,17 @@
 {
   "name": "test",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll"
+    "test": "jest --watch",
+    "zip": "node scripts/zip-code.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "adm-zip": "^0.4.13",
     "babel-jest": "^23.6.0",
     "babel-preset-env": "^1.7.0",
     "faker": "^4.1.0",

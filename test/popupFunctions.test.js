@@ -1,5 +1,5 @@
 import faker from 'faker';
-import { loadListItems } from './popupFunctions.js';
+import { loadListItems } from '../extension-code/popupFunctions';
 
 describe('load list items', () => {
    document.body.innerHTML = `
@@ -30,19 +30,14 @@ describe('load list items', () => {
       }
    ];
 
+   loadListItems(items);
 
    it('should load items from parameter and populate DOM', () => {
-
-      loadListItems(items);
-
       expect(document.querySelector('ul#list-search-tab-title-results li')).toBeTruthy;
       expect(document.querySelectorAll('ul#list-search-tab-title-results li').length).toEqual(2);
    });
 
    it('should update header count items', () => {
-
-      loadListItems(items);
-
       expect(document.querySelector('h4#count-items').textContent).toEqual('2');
    });
 });

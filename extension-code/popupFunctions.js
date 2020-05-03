@@ -20,9 +20,11 @@ function closeTab(event) {
       currentTabId = currTab.id;
     }
   });
-  chrome.tabs.remove(Number(this.dataset.id), () =>
-    focusTab(null, currentTabId)
-  );
+  chrome.tabs.remove(Number(this.dataset.id), () => {
+    focusTab(null, currentTabId);
+    // eslint-disable-next-line no-use-before-define
+    initListItems();
+  });
 }
 
 function loadListItems(items, regex) {

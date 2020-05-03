@@ -1,4 +1,4 @@
-import {initListItems, setInputListener} from "./popupFunctions.js";
+import { initListItems, setInputListener } from './popupFunctions.js';
 
 /* globals chrome */
 

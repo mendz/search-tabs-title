@@ -1,7 +1,8 @@
 /* globals chrome */
 
 let titleTabsCurrentWindow = [];
-const stripHtmlTags = htmlString => htmlString.replace(/(<([^>]+)>)/g, '').replace(/(<|>)/gi, '');
+const stripHtmlTags = htmlString =>
+  htmlString.replace(/(<([^>]+)>)/g, '').replace(/(<|>)/gi, '');
 
 function focusTab(event, id) {
   const idToFocus = id ?? this.dataset.id;
@@ -13,13 +14,15 @@ function focusTab(event, id) {
 function closeTab(event) {
   event.stopPropagation();
   let currentTabId = -1;
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+  chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
     const currTab = tabs[0];
     if (currTab) {
       currentTabId = currTab.id;
     }
   });
-  chrome.tabs.remove(Number(this.dataset.id), () => focusTab(null, currentTabId));
+  chrome.tabs.remove(Number(this.dataset.id), () =>
+    focusTab(null, currentTabId)
+  );
 }
 
 function loadListItems(items, regex) {
@@ -37,15 +40,29 @@ function loadListItems(items, regex) {
       itemUrlText = stripHtmlTags(decodeURI(itemUrlText));
 
       if (regex) {
-        const matchQueryTitle = itemTitleText.match(regex) ? itemTitleText.match(regex)[0] : itemTitleText;
-        const matchQueryUrl = itemUrlText.match(regex) ? itemUrlText.match(regex)[0] : itemUrlText;
-        itemTitleText = itemTitleText.replace(regex, `<span class="matchQuery">${matchQueryTitle}</span>`);
-        itemUrlText = itemUrlText.replace(regex, `<span class="matchQuery">${matchQueryUrl}</span>`);
+        const matchQueryTitle = itemTitleText.match(regex)
+          ? itemTitleText.match(regex)[0]
+          : itemTitleText;
+        const matchQueryUrl = itemUrlText.match(regex)
+          ? itemUrlText.match(regex)[0]
+          : itemUrlText;
+        itemTitleText = itemTitleText.replace(
+          regex,
+          `<span class="matchQuery">${matchQueryTitle}</span>`
+        );
+        itemUrlText = itemUrlText.replace(
+          regex,
+          `<span class="matchQuery">${matchQueryUrl}</span>`
+        );
       }
 
       return `
-    <li data-id="${tab.id}" title="${activeWord}Tab index: ${tabIndex}" ${activeClass}>
-      <span class="close-tab" title="Close Tab" data-id="${tab.id}">&times;</span>
+    <li data-id="${
+      tab.id
+    }" title="${activeWord}Tab index: ${tabIndex}" ${activeClass}>
+      <span class="close-tab" title="Close Tab" data-id="${
+        tab.id
+      }">&times;</span>
       <span class="item-title-text">${itemTitleText}</span>
       <span class="item-url-text">${itemUrlText}</span>
     </li>
@@ -53,7 +70,8 @@ function loadListItems(items, regex) {
     })
     .join('');
 
-  document.querySelectorAll('ul#list-search-tab-title-results li')
+  document
+    .querySelectorAll('ul#list-search-tab-title-results li')
     .forEach(item => {
       item.addEventListener('click', focusTab);
       const closeTabItem = item.querySelector('span.close-tab');
@@ -71,13 +89,12 @@ function initListItems() {
     },
     tabsArray => {
       const tabsTitles = tabsArray.map(tabWindow => {
-
         const info = {
           id: tabWindow.id,
           url: tabWindow.url,
           title: tabWindow.title,
           tabIndex: tabWindow.index + 1,
-          active: tabWindow.active
+          active: tabWindow.active,
         };
         return info;
       });
@@ -93,10 +110,16 @@ function onChangeInputSearch() {
 
   if (inputValue.length !== 0) {
     const regex = new RegExp(inputValue, 'gi');
-    const filteredTabsByTitle = titleTabsCurrentWindow.filter(tab => regex.test(tab.title));
-    const filteredTabsByUrl = titleTabsCurrentWindow.filter(tab => regex.test(tab.url));
+    const filteredTabsByTitle = titleTabsCurrentWindow.filter(tab =>
+      regex.test(tab.title)
+    );
+    const filteredTabsByUrl = titleTabsCurrentWindow.filter(tab =>
+      regex.test(tab.url)
+    );
 
-    const setFilteredTabs = Array.from(new Set([...filteredTabsByTitle, ...filteredTabsByUrl]));
+    const setFilteredTabs = Array.from(
+      new Set([...filteredTabsByTitle, ...filteredTabsByUrl])
+    );
     loadListItems(setFilteredTabs, regex);
   } else {
     loadListItems(titleTabsCurrentWindow);

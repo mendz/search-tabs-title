@@ -1,12 +1,25 @@
 /* globals chrome */
 
 let titleTabsCurrentWindow = [];
-const stripHtmlTags = htmlString => htmlString.replace(/(<([^>]+)>)/g, '').replace(/(<|>)/gi,'');
+const stripHtmlTags = htmlString => htmlString.replace(/(<([^>]+)>)/g, '').replace(/(<|>)/gi, '');
 
-function focusTab() {
-  chrome.tabs.update(Number(this.dataset.id), {
+function focusTab(event, id) {
+  const idToFocus = id ?? this.dataset.id;
+  chrome.tabs.update(Number(idToFocus), {
     active: true,
   });
+}
+
+function closeTab(event) {
+  event.stopPropagation();
+  let currentTabId = -1;
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    const currTab = tabs[0];
+    if (currTab) {
+      currentTabId = currTab.id;
+    }
+  });
+  chrome.tabs.remove(Number(this.dataset.id), () => focusTab(null, currentTabId));
 }
 
 function loadListItems(items, regex) {
@@ -31,12 +44,21 @@ function loadListItems(items, regex) {
       }
 
       return `
-    <li data-id="${tab.id}" title="${activeWord}Tab index: ${tabIndex}" ${activeClass}><span class="item-title-text">${itemTitleText}</span><span class="item-url-text">${itemUrlText}</span></li>
+    <li data-id="${tab.id}" title="${activeWord}Tab index: ${tabIndex}" ${activeClass}>
+      <span class="close-tab" title="Close Tab" data-id="${tab.id}">&times;</span>
+      <span class="item-title-text">${itemTitleText}</span>
+      <span class="item-url-text">${itemUrlText}</span>
+    </li>
     `;
     })
     .join('');
 
-  document.querySelectorAll('ul#list-search-tab-title-results li').forEach(item => item.addEventListener('click', focusTab));
+  document.querySelectorAll('ul#list-search-tab-title-results li')
+    .forEach(item => {
+      item.addEventListener('click', focusTab);
+      const closeTabItem = item.querySelector('span.close-tab');
+      closeTabItem.addEventListener('click', closeTab);
+    });
 
   const countItems = items.length;
   document.querySelector('h4#count-items').textContent = countItems;
@@ -88,8 +110,4 @@ function setInputListener() {
   input.focus();
 }
 
-export {
-  initListItems,
-  setInputListener,
-  loadListItems
-};
+export { initListItems, setInputListener, loadListItems };

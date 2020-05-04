@@ -20,17 +20,18 @@ body::-webkit-scrollbar-thumb {
 * {
   font-family: 'Gudea', sans-serif;
 }
-div#main-container {
+
+div.main-container {
   max-height: 100%;
   min-width: 210px;
 }
 
-div#input-container {
+div.input-wrapper {
   display: flex;
   height: 35px;
 }
 
-div#input-container input#search-tab-title {
+input.input-wrapper__input {
   margin-right: 10%;
   line-height: 1.5;
   border: none;
@@ -41,33 +42,21 @@ div#input-container input#search-tab-title {
   flex-basis: 80%;
 }
 
-div#input-container input#search-tab-title::placeholder {
+input.input-wrapper__input::placeholder {
   color: #97a1ad;
 }
 
-div#input-container input#search-tab-title:focus {
+input.input-wrapper__input:focus {
   outline: none;
   box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.16);
 }
 
-div#input-container div#radio-input-filter {
-  display: flex;
-}
-
-div#input-container div#radio-input-filter label:first-of-type {
-  margin: 0 10px;
-}
-
-span.matchQuery {
-  background-color: rgb(211, 141, 243);
-}
-
-ul#list-search-tab-title-results {
+ul.list-search-results {
   padding-left: 0;
   list-style: none;
 }
 
-ul#list-search-tab-title-results li {
+li.list-search-results__item {
   user-select: none;
   cursor: pointer;
   padding: 0.4em 1em;
@@ -81,20 +70,33 @@ ul#list-search-tab-title-results li {
   position: relative;
 }
 
-ul#list-search-tab-title-results li.active-tab-item {
+li.list-search-results__item:hover {
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.16);
+  background-color: #f6f0f080;
+  color: #000000;
+}
+
+span.list-search-results__item__match-query {
+  background-color: rgb(211, 141, 243);
+}
+
+li.list-search-results__item--active {
   background-color: #c4fff7;
 }
 
-ul#list-search-tab-title-results li span.item-title-text,
-ul#list-search-tab-title-results li span.item-url-text {
+li.list-search-results__item--active:hover {
+  background-color: #bafff7;
+}
+
+span.list-search-results__item__text {
   display: block;
 }
 
-ul#list-search-tab-title-results li span.item-title-text {
+span.list-search-results__item__title {
   font-weight: bold;
 }
 
-ul#list-search-tab-title-results li span.item-url-text {
+span.list-search-results__item__url {
   margin-top: 5px;
   font-style: italic;
   font-size: 0.8em;
@@ -107,23 +109,13 @@ ul#list-search-tab-title-results li span.item-url-text {
   -webkit-box-orient: vertical;
 }
 
-ul#list-search-tab-title-results li:hover {
-  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.16);
-  background-color: #f6f0f080;
-  color: #000000;
-}
-
-ul#list-search-tab-title-results li.active-tab-item:hover {
-  background-color: #bafff7;
-}
-
-ul#list-search-tab-title-results li span.close-tab {
+span.list-search-results__item__close-button {
   position: absolute;
   top: 0;
   right: 2px;
 }
 
-ul#list-search-tab-title-results li span.close-tab:hover {
+span.list-search-results__item__close-button:hover {
   background-color: #e47a7a;
   border-radius: 25%;
 }

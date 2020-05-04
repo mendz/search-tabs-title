@@ -28,14 +28,14 @@ function closeTab(event) {
 }
 
 function loadListItems(items, regex) {
-  const list = document.querySelector('ul#list-search-tab-title-results');
+  const list = document.querySelector('ul.list-search-results');
 
   list.innerHTML = items
     .map(tab => {
       const { tabIndex, active } = tab;
       let { title: itemTitleText, url: itemUrlText } = tab;
 
-      const activeClass = active ? 'class="active-tab-item"' : '';
+      const activeClass = active ? 'list-search-results__item--active' : '';
       const activeWord = active ? 'Active ' : '';
 
       itemTitleText = stripHtmlTags(itemTitleText);
@@ -50,38 +50,40 @@ function loadListItems(items, regex) {
           : itemUrlText;
         itemTitleText = itemTitleText.replace(
           regex,
-          `<span class="matchQuery">${matchQueryTitle}</span>`
+          `<span class="list-search-results__item__match-query">${matchQueryTitle}</span>`
         );
         itemUrlText = itemUrlText.replace(
           regex,
-          `<span class="matchQuery">${matchQueryUrl}</span>`
+          `<span class="list-search-results__item__match-query">${matchQueryUrl}</span>`
         );
       }
 
       return `
     <li data-id="${
       tab.id
-    }" title="${activeWord}Tab index: ${tabIndex}" ${activeClass}>
-      <span class="close-tab" title="Close Tab" data-id="${
+    }" title="${activeWord}Tab index: ${tabIndex}" class="list-search-results__item ${activeClass}">
+      <span class="list-search-results__item__close-button" title="Close Tab" data-id="${
         tab.id
       }">&times;</span>
-      <span class="item-title-text">${itemTitleText}</span>
-      <span class="item-url-text">${itemUrlText}</span>
+      <span class="list-search-results__item__text list-search-results__item__title">${itemTitleText}</span>
+      <span class="list-search-results__item__text list-search-results__item__url">${itemUrlText}</span>
     </li>
     `;
     })
     .join('');
 
-  document
-    .querySelectorAll('ul#list-search-tab-title-results li')
-    .forEach(item => {
-      item.addEventListener('click', focusTab);
-      const closeTabItem = item.querySelector('span.close-tab');
-      closeTabItem.addEventListener('click', closeTab);
-    });
+  document.querySelectorAll('li.list-search-results__item').forEach(item => {
+    item.addEventListener('click', focusTab);
+    const closeTabItem = item.querySelector(
+      'span.list-search-results__item__close-button'
+    );
+    closeTabItem.addEventListener('click', closeTab);
+  });
 
   const countItems = items.length;
-  document.querySelector('h4#count-items').textContent = countItems;
+  document.querySelector(
+    'h4.input-wrapper__items_count'
+  ).textContent = countItems;
 }
 
 function initListItems() {
@@ -129,7 +131,7 @@ function onChangeInputSearch() {
 }
 
 function setInputListener() {
-  const input = document.querySelector('input#search-tab-title');
+  const input = document.querySelector('input.input-wrapper__input');
   input.addEventListener('input', onChangeInputSearch);
 
   input.focus();

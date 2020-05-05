@@ -1,29 +1,30 @@
 :root {
-  --light-white: #f5f5f5;
-  --red: #e47a7a;
+  --white: #f5f5f5;
   --black: #000000;
   --purple: #d38df3;
   --dark-purple: #c38cb3;
-  --brown: #694d4d;
   --gray: rgba(246, 240, 240, 0.502);
   --dark-gray: rgba(255, 255, 255, 0.2);
-  --blue: #c4fff7;
-  --darker-blue: #bafff7;
   --small-box-shadow: rgba(0, 0, 0, 0.3);
   --medium-box-shadow: rgba(0, 0, 0, 0.3);
   --large-box-shadow: rgba(0, 0, 0, 0.16);
+}
+
+body {
+  margin: 0;
+  margin-bottom: 8px;
 }
 
 body::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px var(--small-box-shadow);
   box-shadow: inset 0 0 6px var(--small-box-shadow);
   border-radius: 10px;
-  background-color: var(--light-white);
+  background-color: var(--white);
 }
 
 body::-webkit-scrollbar {
   width: 8px;
-  background-color: var(--light-white);
+  background-color: var(--white);
 }
 
 body::-webkit-scrollbar-thumb {
@@ -37,18 +38,40 @@ body::-webkit-scrollbar-thumb {
   font-family: 'Gudea', sans-serif;
 }
 
-div.main-container {
+header {
+  position: sticky;
+  top: -1px;
+  padding: 1em;
+  padding-top: calc(1em + 1px);
+  margin-bottom: 10px;
+  z-index: 99999;
+  background-color: var(--white);
+  box-shadow: 1px 2px 3px var(--small-box-shadow);
+  transition: 0.1s;
+  border-radius: 2px;
+}
+
+header.header--sticky {
+  font-size: 0.8em;
+  border-radius: 10px;
+  box-shadow: 1px 2px 3px var(--medium-box-shadow);
+}
+
+main {
   max-height: 100%;
   min-width: 210px;
+  margin: 0 8px;
 }
 
 div.input-wrapper {
   display: flex;
   height: 35px;
+  padding-bottom: 5px;
 }
 
 input.input-wrapper__input {
   margin-right: 10%;
+  padding-bottom: 50px;
   line-height: 1.5;
   border: none;
   background-color: var(--dark-gray);
@@ -81,7 +104,7 @@ li.list-search-results__item {
   word-break: break-word;
   min-width: 210px;
   box-shadow: 0 2px 2px 0 var(--large-box-shadow);
-  color: var(--light-brown);
+  color: #694d4d;
   border-radius: 15px;
   position: relative;
 }
@@ -97,11 +120,11 @@ span.list-search-results__item__match-query {
 }
 
 li.list-search-results__item--active {
-  background-color: var(--blue);
+  background-color: #c4fff7;
 }
 
 li.list-search-results__item--active:hover {
-  background-color: var(--darker-blue);
+  background-color: #bafff7;
 }
 
 span.list-search-results__item__text {
@@ -132,6 +155,6 @@ span.list-search-results__item__close-button {
 }
 
 span.list-search-results__item__close-button:hover {
-  background-color: var(--red);
+  background-color: #e47a7a;
   border-radius: 25%;
 }

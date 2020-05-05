@@ -3,14 +3,21 @@ import { loadListItems } from '../extension-code/popupFunctions';
 
 describe('load list items', () => {
   document.body.innerHTML = `
-   <h1 class="main-title">Search Your Tab</h1>
-   <div class="main-container">
+    <header>
+      <h1 class="main-title">Search Your Tab</h1>
       <div class="input-wrapper">
-         <input class="input-wrapper__input" name="search-tab-title" type="search" placeholder="Insert title/URL" />
-         <h4 class="input-wrapper__items_count" title="Search item count"></h4>
+        <input
+          class="input-wrapper__input"
+          name="search-tab-title"
+          type="search"
+          placeholder="Insert title/URL"
+        />
+        <h4 class="input-wrapper__items_count" title="Search item count"></h4>
       </div>
+    </header>
+    <main>
       <ul class="list-search-results"></ul>
-   </div>
+    </main>
    `;
 
   const items = [

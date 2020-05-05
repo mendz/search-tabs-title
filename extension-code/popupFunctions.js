@@ -137,4 +137,19 @@ function setInputListener() {
   input.focus();
 }
 
-export { initListItems, setInputListener, loadListItems };
+function detectHeaderIsSticky() {
+  const stickyElement = document.querySelector('header');
+
+  const observer = new IntersectionObserver(
+    ([element]) =>
+      element.target.classList.toggle(
+        'header--sticky',
+        element.intersectionRatio < 1
+      ),
+    { threshold: [1] }
+  );
+
+  observer.observe(stickyElement);
+}
+
+export { initListItems, setInputListener, loadListItems, detectHeaderIsSticky };
